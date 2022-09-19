@@ -1,0 +1,27 @@
+{% extends 'myblog/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <div class="card mt-3 border-0">
+    <div class="card-body text-center">
+
+      <h2>Login</h2>
+      {% if form.errors %}
+          <p>Your username and password didn't match. Please try again!</p>
+      {% endif %}
+
+      <form method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <p class="text-end">
+              <br>
+            <input type="submit" class='btn btn-outline-primary ' aria-pressed="true"   value="Login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+<!--              переадресация-->
+          </p>
+      </form>
+    </div>
+  </div>
+{% endblock %}
